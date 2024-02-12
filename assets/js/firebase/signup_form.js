@@ -3,7 +3,7 @@ import { auth } from "./firebase.js"
 import { showMessage } from "./show_message.js";
 
 // obtenemos el form con ese id
-const signupForm = document.getElementById('signup-form'); 
+const signupForm = document.getElementById("signup-form"); 
 
 // agregamos el evento al mandar el form 
 signupForm.addEventListener('submit' , async (e) => {
@@ -22,9 +22,12 @@ signupForm.addEventListener('submit' , async (e) => {
     const credentials =  await createUserWithEmailAndPassword(auth, email, password);
     console.log(credentials);
 
+    //ocultar el modal
     const signupModal = document.getElementById('signup-modal');
     const modal = bootstrap.Modal.getInstance(signupModal);
-    modal.hide()
+    // Limpiamos los campos del form
+   signupForm.reset();
+    modal.hide();
 }
 // manejo de errores
     catch (error) {

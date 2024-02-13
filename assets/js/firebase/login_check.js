@@ -1,3 +1,7 @@
+import { showMessage } from "./show_message.js";
+
+import (showMessage)
+
 const loggedOutLinks = document.querySelectorAll('.logged-out');
 const loggedInLinks = document.querySelectorAll('.logged-in');
 
@@ -6,9 +10,11 @@ export const loginCheck = user => {
     if (user) {
         loggedInLinks.forEach(link => link.style.display = 'block');
         loggedOutLinks.forEach(link => link.style.display = 'none');
+        showMessage('logged out', 'green');
     }
     else {
         loggedInLinks.forEach(link => link.style.display = 'none');
         loggedOutLinks.forEach(link => link.style.display = 'block');
+        showMessage('logged out', 'orange');
     }
 }

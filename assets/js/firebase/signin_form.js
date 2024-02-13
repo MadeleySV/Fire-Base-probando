@@ -20,10 +20,20 @@ signinForm.addEventListener('submit', async (e) => {
     try {
     const credentials =  await signInWithEmailAndPassword(auth, email, password);
     console.log(credentials);
+
+    //ocultar el modal
+    const signinModal = document.getElementById('signin-modal');
+    const modal = bootstrap.Modal.getInstance(signinModal);
+    // Limpiamos los campos del form
+    signinForm.reset();
+    modal.hide();
+
     }
 
     catch (error) {
         console.log(error);
-        
+
+    
+
     }
 });

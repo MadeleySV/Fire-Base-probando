@@ -33,7 +33,23 @@ signinForm.addEventListener('submit', async (e) => {
     catch (error) {
         console.log(error);
 
-    
+        if (error.code === 'auth/email-already-in-use') {
+
+            showMessage('Email already/ in use', 'red');
+         }
+         
+         else if (error.code === 'auth/invalid-email'){
+             showMessage('Invalid email', 'red');
+         }
+ 
+         else if (error.code === 'auth/weak-password'){
+             showMessage('Weak password', 'red');
+         }
+ 
+         else {
+              showMessage('something went wrong', 'red')
+         
+     }
 
     }
 });

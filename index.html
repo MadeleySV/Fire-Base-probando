@@ -34,18 +34,23 @@
       </nav>
 <h1>autenticación con Firebase</h1>
 
-<div id="tasks-container">
-  <div id="create-tasks">
-    <form id="create-form">
-      <label for="task-title">title: </label>
-      <input type="text" id="task-title" />
-      <label for="task-content">Content: </label>
-      <textarea id="task-content" cols="30" rows="5"></textarea>
-      <button type="submit">Create task</button>
 
-    </form>
+
+<main class="row w-75 mx-auto">
+  <div class="col-md-6" id="task-form-container">
+    <div id="create-tasks">
+      <form id="create-form">
+        <label for="task-title">Title:</label>
+        <input type="text" id="task-title" />
+        <label for="task-content">Content:</label>
+        <textarea id="task-content" cols="30" rows="5"></textarea>
+        <button type="submit">Create Task</button>
+      </form>
+    </div>
   </div>
-</div>
+
+<!-- Acá se mostraran las tasks de la base de datos  -->
+<div id="tasks-container"></div>
 
 
   <!-- signin Modal -->

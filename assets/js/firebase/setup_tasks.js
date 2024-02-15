@@ -1,9 +1,36 @@
-import { createTask } from "./firebase.js";
+import { createTask, onGetTask} from "./firebase.js";
 
 const taskForm = document.getElementById("create-form");
+const tasksContainer = document.getElementById("tasks-container");
+
+window.addEventListener("DOMContentLoaded", () => {
+    onGetTask((querySnapshot) => {
+        let html = '';
+
+        querySnapshot.forEach(doc => {
+            const data = doc.data();
+
+            html += `
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h4 class="card-title">${data.title}</h4>
+                        <p class="card-text">${data.description}</p>
+                        <div class="row">
+                            <button class='btn btn-danger btn-delete-custom mx-auto col-5' data-id='${doc.id}'>Delete</button>
+                            <button class='btn btn-info btn-edit-custom mx-auto col-5' data-id='${doc.id}'>Edit</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+        });
+
+        tasksContainer.innerHTML = html;
+    });
+});
 
 taskForm.addEventListener("submit", (e) => {
-    // evitamos que recargue la pagina
+    // Evitamos que recargue la pagina
     e.preventDefault();
 
     const title = taskForm["task-title"].value;
@@ -12,4 +39,4 @@ taskForm.addEventListener("submit", (e) => {
     createTask(title, description);
 
     taskForm.reset();
-})
+});

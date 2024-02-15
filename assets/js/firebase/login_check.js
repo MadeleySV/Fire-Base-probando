@@ -1,7 +1,5 @@
 import { showMessage } from "./show_message.js";
 
-import (showMessage)
-
 const loggedOutLinks = document.querySelectorAll('.logged-out');
 const loggedInLinks = document.querySelectorAll('.logged-in');
 

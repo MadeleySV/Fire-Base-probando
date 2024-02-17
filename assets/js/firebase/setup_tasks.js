@@ -13,7 +13,7 @@ let userGlobal;
 
     export default function setupTasks (user) {
         userGlobal = user;
-
+        console.log(user);
     onGetTask((querySnapshot) => {
 
         let html = '';

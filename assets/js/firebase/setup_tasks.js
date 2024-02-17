@@ -9,11 +9,16 @@ const tasksContainer = document.getElementById("tasks-container");
 
 let id = "";
 let editStatus = false;
+let userGlobal;
 
-    export default function setupTasks () {
+    export default function setupTasks (user) {
+        userGlobal = user;
+
     onGetTask((querySnapshot) => {
+
         let html = '';
 
+        // REAd
         // crear el gred
         querySnapshot.forEach(doc => {
             const data = doc.data();
@@ -21,7 +26,10 @@ let editStatus = false;
             html += `
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h4 class="card-title">${data.title}</h4>
+                        <h6>${data.userName}</6>
+                        <p>${data.time}</p>
+                        <p class="text-end " >${data.date}</p>
+                        <h4 class="card-title" >${data.title}</h4>
                         <p class="card-text">${data.description}</p>
                         <div class="row">
                             <button class='btn btn-danger btn-delete-custom mx-auto col-5' data-id='${doc.id}'>Delete</button>
@@ -32,6 +40,8 @@ let editStatus = false;
             `;
 
         });
+
+
 
         tasksContainer.innerHTML = html;
 
@@ -71,12 +81,20 @@ taskForm.addEventListener("submit", (e) => {
     // Evitamos que recargue la pagina
     e.preventDefault();
 
+// OBTENER EL NOMBRE
+    const userName = userGlobal.displayName;
+
+
+// FECHA
+    const date = getFormattedDate(new Date());
+ const time = getFormattedTime(new Date());
+
     const title = taskForm["task-title"].value;
     const description = taskForm["task-content"].value;
 
     // si no estoy editando el boton sirve para crear
     if (!editStatus){
-            createTask(title, description);
+            createTask(title, description, userName, date, time);
     }
 
     else {
@@ -95,3 +113,33 @@ taskForm.addEventListener("submit", (e) => {
 
     taskForm.reset();
 });
+
+function getFormattedDate(date) {
+    var year = date.getFullYear();
+  
+    var month = (1 + date.getMonth()).toString();
+    month = month.length > 1 ? month : '0' + month;
+  
+    var day = date.getDate().toString();
+    day = day.length > 1 ? day : '0' + day;
+    
+    return month + '/' + day + '/' + year;
+  }
+
+  function getFormattedTime(date) {
+    var hours = date.getHours().toString();
+    hours = hours.length > 1 ? hours : '0' + hours;
+  
+    var minutes = date.getMinutes().toString();
+    minutes = minutes.length > 1 ? minutes : '0' + minutes;
+  
+    return hours + ':' + minutes;
+  }
+  
+  // Ejemplo de uso
+  var ahora = new Date();
+  var horaFormateada = getFormattedTime(ahora);
+  console.log(horaFormateada);  // Salida esperada: "hh:mm"
+  
+  
+  

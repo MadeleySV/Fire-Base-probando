@@ -6,6 +6,8 @@ import {
   collection,
   addDoc,
   doc,
+  getDoc,
+  updateDoc,
   deleteDoc,
   onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
@@ -34,7 +36,12 @@ const firebaseConfig = {
 //  Funciones del CRUD
 export const createTask = (title, description) => addDoc(collection(db, "tasks"),{ title, description}); 
 
+export const getTask = id => getDoc(doc(db, "tasks", id));
+
 export const onGetTask = (callback) => onSnapshot(collection(db, "tasks"),callback);
 
+export const updateTask = (id, newFields) => updateDoc (doc(db, "tasks", id), newFields);
+
 export const deleteTask = id => deleteDoc(doc(db, "tasks", id));
+
 

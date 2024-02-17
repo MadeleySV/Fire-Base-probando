@@ -10,7 +10,7 @@ const tasksContainer = document.getElementById("tasks-container");
 let id = "";
 let editStatus = false;
 
-window.addEventListener("DOMContentLoaded", () => {
+    export default function setupTasks () {
     onGetTask((querySnapshot) => {
         let html = '';
 
@@ -60,11 +60,11 @@ window.addEventListener("DOMContentLoaded", () => {
                 // taskText.innerHTML = 'Edit Task';
             });
         });
-                // LOGICA DE UPDATE
+    
 
 
             });
-        });
+        };
 
 // create
 taskForm.addEventListener("submit", (e) => {
